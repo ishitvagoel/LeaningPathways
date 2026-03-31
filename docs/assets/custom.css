@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&display=swap');
 
 :root {
-  --md-primary-fg-color: #3f51b5; /* Deep Indigo */
-  --md-accent-fg-color: #009688;  /* Emerald */
-  --gradient-primary: linear-gradient(135deg, #3f51b5 0%, #009688 100%);
+  --md-primary-fg-color: #2e7d32; /* Deep Green */
+  --md-accent-fg-color: #c0ca33;  /* Lime */
+  --gradient-primary: linear-gradient(135deg, #1b5e20 0%, #c0ca33 100%);
 }
 
 [data-md-color-scheme="default"] {
