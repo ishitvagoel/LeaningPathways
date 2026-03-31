@@ -4,13 +4,45 @@
   {# Original edit/view buttons #}
   {{ super() }}
 
-  {# Custom Download button pointing to local same-domain source #}
+  {# Custom Download button with forced download via same-domain fetch #}
   {% if page and page.file %}
-    <a href="{{ base_url }}sources/{{ page.file.src_path }}" 
-       download="{{ page.title | replace(' ', '-') }}.md"
+    <a href="javascript:void(0)" 
+       onclick="forceDownload('{{ base_url }}sources/{{ page.file.src_path }}', '{{ page.title | replace("'", "\\'") }}.md')"
        title="Download Markdown" 
        class="md-content__button md-icon">
       {% include ".icons/material/download.svg" %}
     </a>
+
+    <script>
+      function forceDownload(url, fileName) {
+        // Clean up filename
+        const safeName = fileName.replace(/[/\\?%*:|"<>]/g, '-').trim();
+        
+        fetch(url)
+          .then(response => {
+            if (!response.ok) throw new Error('File not found');
+            return response.blob();
+          })
+          .then(blob => {
+            const blobUrl = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = blobUrl;
+            a.download = safeName;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(blobUrl);
+            document.body.removeChild(a);
+          })
+          .catch(err => {
+            console.error('Download failed, falling back to direct link:', err);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = safeName;
+            a.target = '_blank';
+            a.click();
+          });
+      }
+    </script>
   {% endif %}
 {% endblock %}
