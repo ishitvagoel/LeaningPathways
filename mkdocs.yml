@@ -3,20 +3,20 @@ site_url: https://ishitva.github.io/LeaningPathways/
 theme:
   name: material
   font:
-    text: Roboto
-    code: Roboto Mono
+    text: Inter
+    code: Fira Code
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
       primary: indigo
-      accent: indigo
+      accent: teal
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: indigo
-      accent: indigo
+      accent: teal
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
@@ -28,27 +28,58 @@ theme:
     - navigation.top
     - navigation.tracking
     - navigation.instant
+    - navigation.sticky
     - search.suggest
     - search.highlight
     - content.code.copy
     - content.tooltips
-  icon:
-    logo: material/library-shelves
-
-markdown_extensions:
-  - admonition
-  - pymdownx.details
-  - pymdownx.superfences
-  - pymdownx.tabbed:
-      alternate_style: true
-  - attr_list
-  - md_in_html
+    - content.action.edit
+    - content.action.view
 
 extra_css:
   - assets/custom.css
 
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - attr_list
+  - md_in_html
+
 nav:
   - Home: index.md
   - AI Engineering:
-      - LangChain Path: ai-engineering/langchain-path.md
-      - AI Mastery Plan: ai-engineering/ai-mastery-plan.md
+      - ai-engineering/
+
+repo_url: https://github.com/ishitvagoel/LeaningPathways
+repo_name: ishitvagoel/LeaningPathways
+edit_uri: edit/main/docs/
+
+extra:
+  analytics:
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: This page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+        - icon: material/emoticon-sad-outline
+          name: This page could be improved
+          data: 0
+          note: >-
+            Thanks for your feedback! Help us improve this page by
+            opening an issue.
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ishitvagoel
