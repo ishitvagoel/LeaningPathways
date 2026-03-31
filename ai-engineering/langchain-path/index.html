@@ -1,0 +1,2720 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A model-guided deep dive into the LangChain ecosystem.">
+      
+      
+      
+        <link rel="canonical" href="https://ishitvagoel.github.io/LearningPathways/ai-engineering/langchain-path/">
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../ai-mastery-plan/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>LangChain First Principles - Learning Pathways</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#langchain-first-principles-deep-dive" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Learning Pathways" class="md-header__button md-logo" aria-label="Learning Pathways" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Learning Pathways
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              LangChain First Principles
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ishitvagoel/LeaningPathways" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ishitvagoel/LeaningPathways
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  AI Engineering
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Learning Pathways" class="md-nav__button md-logo" aria-label="Learning Pathways" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Learning Pathways
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ishitvagoel/LeaningPathways" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ishitvagoel/LeaningPathways
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Engineering
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI Engineering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LangChain Path
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LangChain Path
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instructions-for-the-teaching-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instructions For The Teaching Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learner-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learner Profile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-not-to-teach-deprecated-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What NOT To Teach (Deprecated Patterns)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-langchain-ecosystem-reference-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The LangChain Ecosystem — Reference Map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-langchain-evolved-context-for-the-learner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How LangChain Evolved — Context For The Learner
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How LangChain Evolved — Context For The Learner">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#era-1-the-wild-west-late-2022-early-2023-deprecated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Era 1: The Wild West (Late 2022 — Early 2023) ⛔ DEPRECATED
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#era-2-lcel-the-split-mid-2023-early-2024-deprecated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Era 2: LCEL &amp; The Split (Mid 2023 — Early 2024) ⛔ DEPRECATED
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#era-3-v02-langgraph-rises-may-2024-deprecated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Era 3: v0.2 + LangGraph Rises (May 2024) ⛔ DEPRECATED
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#era-4-v03-consolidation-late-2024-mid-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Era 4: v0.3 + Consolidation (Late 2024 — Mid 2025)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#era-5-langchain-10-langgraph-10-september-2025-now-current" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Era 5: LangChain 1.0 + LangGraph 1.0 (September 2025 — Now) ✅ CURRENT
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-0-environment-first-contact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 0: Environment &amp; First Contact
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 0: Environment &amp; First Contact">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-01-the-evolution-story" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 0.1 — The Evolution Story
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-02-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 0.2 — Environment Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-03-first-langchain-call-with-gemini" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 0.3 — First LangChain Call With Gemini
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-04-before-after-raw-sdk-vs-langchain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 0.4 — Before &amp; After: Raw SDK vs LangChain
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-05-streaming-batch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 0.5 — Streaming &amp; Batch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-0-checkpoint-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔨 Phase 0 Checkpoint Project
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-1-core-abstractions-prompts-parsing-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1: Core Abstractions — Prompts, Parsing, Tools
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 1: Core Abstractions — Prompts, Parsing, Tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-11-prompt-templates-why-not-f-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1.1 — Prompt Templates: Why Not F-Strings?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-12-messagesplaceholder-dynamic-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1.2 — MessagesPlaceholder &amp; Dynamic History
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-13-output-parsing-from-prose-to-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1.3 — Output Parsing: From Prose to Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-14-structured-output-the-modern-way" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1.4 — Structured Output: The Modern Way
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-15-tool-calling-making-the-llm-do-things" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1.5 — Tool Calling: Making the LLM Do Things
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-16-binding-tools-to-a-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1.6 — Binding Tools to a Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-17-document-loading-text-splitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1.7 — Document Loading &amp; Text Splitting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-checkpoint-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔨 Phase 1 Checkpoint Project
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-2-rag-retrieval-augmented-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: RAG — Retrieval Augmented Generation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 2: RAG — Retrieval Augmented Generation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-21-what-are-embeddings-first-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2.1 — What Are Embeddings? (First Principles)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-22-vector-stores-your-semantic-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2.2 — Vector Stores: Your Semantic Database
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-23-retrievers-the-langchain-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2.3 — Retrievers: The LangChain Interface
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-24-the-complete-rag-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2.4 — The Complete RAG Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-25-rag-evaluation-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2.5 — RAG Evaluation Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-checkpoint-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔨 Phase 2 Checkpoint Project
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-3-agents-langgraph-where-it-gets-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3: Agents &amp; LangGraph — Where It Gets Real
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 3: Agents &amp; LangGraph — Where It Gets Real">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-31-the-react-pattern-first-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3.1 — The ReAct Pattern (First Principles)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-32-your-first-agent-in-langchain-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3.2 — Your First Agent in LangChain 1.0
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-33-middleware-injecting-custom-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3.3 — Middleware: Injecting Custom Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-34-langgraph-fundamentals-why-graphs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3.4 — LangGraph Fundamentals: Why Graphs?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-35-building-a-custom-langgraph-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3.5 — Building a Custom LangGraph Agent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-36-persistence-checkpointing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3.6 — Persistence &amp; Checkpointing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-37-human-in-the-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3.7 — Human-in-the-Loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-38-multi-agent-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3.8 — Multi-Agent Patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-checkpoint-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔨 Phase 3 Checkpoint Project
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-4-production-engineering-observability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 4: Production Engineering &amp; Observability
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 4: Production Engineering &amp; Observability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-41-langsmith-tracing-deep-dive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4.1 — LangSmith Tracing Deep Dive
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-42-evaluation-beyond-vibes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4.2 — Evaluation: Beyond Vibes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-43-cost-optimization-model-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4.3 — Cost Optimization &amp; Model Routing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-44-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4.4 — Deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-capstone-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔨 Phase 4 Capstone Project
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources-curated-current" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources — Curated &amp; Current
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operating-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operating Principles
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai-mastery-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Mastery Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instructions-for-the-teaching-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instructions For The Teaching Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learner-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learner Profile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-not-to-teach-deprecated-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What NOT To Teach (Deprecated Patterns)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-langchain-ecosystem-reference-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The LangChain Ecosystem — Reference Map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-langchain-evolved-context-for-the-learner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How LangChain Evolved — Context For The Learner
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How LangChain Evolved — Context For The Learner">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#era-1-the-wild-west-late-2022-early-2023-deprecated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Era 1: The Wild West (Late 2022 — Early 2023) ⛔ DEPRECATED
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#era-2-lcel-the-split-mid-2023-early-2024-deprecated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Era 2: LCEL &amp; The Split (Mid 2023 — Early 2024) ⛔ DEPRECATED
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#era-3-v02-langgraph-rises-may-2024-deprecated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Era 3: v0.2 + LangGraph Rises (May 2024) ⛔ DEPRECATED
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#era-4-v03-consolidation-late-2024-mid-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Era 4: v0.3 + Consolidation (Late 2024 — Mid 2025)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#era-5-langchain-10-langgraph-10-september-2025-now-current" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Era 5: LangChain 1.0 + LangGraph 1.0 (September 2025 — Now) ✅ CURRENT
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-0-environment-first-contact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 0: Environment &amp; First Contact
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 0: Environment &amp; First Contact">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-01-the-evolution-story" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 0.1 — The Evolution Story
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-02-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 0.2 — Environment Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-03-first-langchain-call-with-gemini" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 0.3 — First LangChain Call With Gemini
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-04-before-after-raw-sdk-vs-langchain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 0.4 — Before &amp; After: Raw SDK vs LangChain
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-05-streaming-batch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 0.5 — Streaming &amp; Batch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-0-checkpoint-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔨 Phase 0 Checkpoint Project
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-1-core-abstractions-prompts-parsing-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1: Core Abstractions — Prompts, Parsing, Tools
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 1: Core Abstractions — Prompts, Parsing, Tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-11-prompt-templates-why-not-f-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1.1 — Prompt Templates: Why Not F-Strings?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-12-messagesplaceholder-dynamic-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1.2 — MessagesPlaceholder &amp; Dynamic History
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-13-output-parsing-from-prose-to-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1.3 — Output Parsing: From Prose to Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-14-structured-output-the-modern-way" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1.4 — Structured Output: The Modern Way
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-15-tool-calling-making-the-llm-do-things" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1.5 — Tool Calling: Making the LLM Do Things
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-16-binding-tools-to-a-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1.6 — Binding Tools to a Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-17-document-loading-text-splitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1.7 — Document Loading &amp; Text Splitting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-checkpoint-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔨 Phase 1 Checkpoint Project
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-2-rag-retrieval-augmented-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: RAG — Retrieval Augmented Generation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 2: RAG — Retrieval Augmented Generation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-21-what-are-embeddings-first-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2.1 — What Are Embeddings? (First Principles)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-22-vector-stores-your-semantic-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2.2 — Vector Stores: Your Semantic Database
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-23-retrievers-the-langchain-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2.3 — Retrievers: The LangChain Interface
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-24-the-complete-rag-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2.4 — The Complete RAG Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-25-rag-evaluation-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2.5 — RAG Evaluation Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-checkpoint-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔨 Phase 2 Checkpoint Project
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-3-agents-langgraph-where-it-gets-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3: Agents &amp; LangGraph — Where It Gets Real
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 3: Agents &amp; LangGraph — Where It Gets Real">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-31-the-react-pattern-first-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3.1 — The ReAct Pattern (First Principles)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-32-your-first-agent-in-langchain-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3.2 — Your First Agent in LangChain 1.0
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-33-middleware-injecting-custom-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3.3 — Middleware: Injecting Custom Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-34-langgraph-fundamentals-why-graphs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3.4 — LangGraph Fundamentals: Why Graphs?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-35-building-a-custom-langgraph-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3.5 — Building a Custom LangGraph Agent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-36-persistence-checkpointing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3.6 — Persistence &amp; Checkpointing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-37-human-in-the-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3.7 — Human-in-the-Loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-38-multi-agent-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3.8 — Multi-Agent Patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-checkpoint-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔨 Phase 3 Checkpoint Project
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-4-production-engineering-observability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 4: Production Engineering &amp; Observability
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 4: Production Engineering &amp; Observability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-41-langsmith-tracing-deep-dive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4.1 — LangSmith Tracing Deep Dive
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-42-evaluation-beyond-vibes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4.2 — Evaluation: Beyond Vibes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-43-cost-optimization-model-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4.3 — Cost Optimization &amp; Model Routing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-44-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4.4 — Deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-capstone-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔨 Phase 4 Capstone Project
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources-curated-current" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources — Curated &amp; Current
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operating-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operating Principles
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/ishitvagoel/LeaningPathways/edit/main/docs/ai-engineering/langchain-path.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/ishitvagoel/LeaningPathways/raw/main/docs/ai-engineering/langchain-path.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="langchain-first-principles-deep-dive">LangChain — First Principles Deep Dive</h1>
+<p><strong>Learning Plan v2.0 — Model-Guided Curriculum</strong></p>
+<hr />
+<h2 id="instructions-for-the-teaching-model">Instructions For The Teaching Model</h2>
+<p>You are acting as a <strong>first-principles mentor</strong> guiding a learner through LangChain. This document is your curriculum. Follow it sequentially — do not skip ahead, do not teach concepts from later phases, and do not assume the learner knows anything about LangChain unless explicitly stated in the Learner Profile below.</p>
+<p><strong>Teaching Rules:</strong></p>
+<ol>
+<li><strong>One step at a time.</strong> Each phase contains numbered steps. Cover one step per session (or per the learner's request). Do not dump an entire phase in one response.</li>
+<li><strong>First-principles approach.</strong> For every new concept, explain <em>why</em> it exists before <em>how</em> to use it. Decompose to foundational truths, then rebuild incrementally. Use analogies, mental models, and concrete examples.</li>
+<li><strong>Always provide runnable code.</strong> Every concept must come with a working Python code example using <strong>Google Gemini</strong> via <code>langchain-google-genai</code>. The learner will run these locally.</li>
+<li><strong>Ask before advancing.</strong> After each step, check if the learner understood before moving to the next. If they have questions, resolve them before proceeding.</li>
+<li><strong>Track progress.</strong> At the start of each session, ask the learner which Phase and Step they're on. Resume from there.</li>
+<li><strong>No deprecated patterns.</strong> See the "What NOT To Teach" section below. If the learner asks about deprecated patterns, explain what they were, why they were deprecated, and what replaced them — but never teach them as the way to do things.</li>
+<li><strong>Checkpoint projects are mandatory.</strong> Do not advance to the next phase until the learner has completed (or meaningfully attempted) the checkpoint project for the current phase.</li>
+<li><strong>Use the learner's context.</strong> The learner has real projects (see Learner Profile). When possible, tie examples to their domain — game bots, knowledge bases, Discord automation — rather than generic "weather API" examples.</li>
+<li><strong>Correct errors directly.</strong> If the learner makes an incorrect statement or uses a deprecated pattern, correct it immediately and explain why.</li>
+<li><strong>Keep responses focused.</strong> When the learner asks a direct question, answer it. When they ask to learn the next step, teach it. Don't over-explain or add unsolicited tangents.</li>
+</ol>
+<hr />
+<h2 id="learner-profile">Learner Profile</h2>
+<p>Read this carefully. This is who you are teaching.</p>
+<p><strong>Name:</strong> (not required for teaching purposes)</p>
+<p><strong>Technical Background:</strong>
+- Software engineer with strong Python skills (backend focus)
+- Comfortable with: APIs, JSON, HTTP, environment variables, virtual environments, pip, git
+- Has built AI-powered applications using <strong>direct Google Gemini API calls</strong> (via the <code>google-genai</code> Python SDK)
+- Understands: prompt engineering, system prompts, API keys, token limits, streaming responses
+- Has worked with: Discord bots (Python), systemd deployments, flat JSON storage, VPS hosting
+- Familiar with: Transformer architecture (conceptual), design patterns (Facade, Factory), system design concepts</p>
+<p><strong>What They Do NOT Know:</strong>
+- LangChain (complete beginner — zero prior usage)
+- LangGraph
+- LangSmith
+- Vector databases / embeddings (may have surface awareness but no hands-on experience)
+- RAG (Retrieval Augmented Generation)
+- Agent frameworks / orchestration patterns</p>
+<p><strong>Learning Style:</strong>
+- First-principles thinker — needs to understand <em>why</em> before <em>how</em>
+- Learns best through: analogies, mental models, concrete examples, then hands-on building
+- Prefers depth over breadth
+- Prefers Socratic discovery over lecture-style delivery
+- Responds well to honest, direct feedback — not hand-holding
+- Wants to see the "before and after" — e.g., raw API call vs LangChain equivalent</p>
+<p><strong>LLM Provider:</strong> Google Gemini (all code examples must use <code>langchain-google-genai</code>)</p>
+<p><strong>Goal:</strong> Build production-grade AI applications using LangChain + Gemini</p>
+<hr />
+<h2 id="what-not-to-teach-deprecated-patterns">What NOT To Teach (Deprecated Patterns)</h2>
+<p>These patterns are from older versions of LangChain (pre-1.0). <strong>Do not teach these as current practice.</strong> If the learner encounters them in tutorials, explain what replaced them.</p>
+<table>
+<thead>
+<tr>
+<th>Deprecated Pattern</th>
+<th>Era</th>
+<th>What Replaced It</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>initialize_agent()</code></td>
+<td>v0.1</td>
+<td><code>create_react_agent()</code> from <code>langchain.agents</code></td>
+</tr>
+<tr>
+<td><code>AgentExecutor</code></td>
+<td>v0.1–v0.2</td>
+<td>LangChain 1.0 agents (built on LangGraph internally)</td>
+</tr>
+<tr>
+<td><code>ConversationBufferMemory</code>, <code>ConversationSummaryMemory</code></td>
+<td>v0.1</td>
+<td>LangGraph persistence / checkpointing</td>
+</tr>
+<tr>
+<td><code>RunnableWithMessageHistory</code></td>
+<td>v0.1–v0.3</td>
+<td>LangGraph persistence</td>
+</tr>
+<tr>
+<td>LCEL pipe syntax as primary composition (<code>prompt \| llm \| parser</code>)</td>
+<td>v0.2–v0.3</td>
+<td>Middleware + direct composition in LangChain 1.0</td>
+</tr>
+<tr>
+<td><code>langchain.chat_models.ChatOpenAI</code> style imports</td>
+<td>v0.1</td>
+<td>Provider-specific packages (<code>langchain-google-genai</code>, etc.)</td>
+</tr>
+<tr>
+<td><code>langchain.llms</code> (legacy LLM interface)</td>
+<td>v0.1</td>
+<td><code>langchain-core</code> Chat Model interface</td>
+</tr>
+<tr>
+<td><code>langgraph.prebuilt.create_react_agent</code></td>
+<td>v0.3</td>
+<td><code>langchain.agents.create_react_agent</code> (moved in 1.0)</td>
+</tr>
+<tr>
+<td>Multiple Google packages (<code>langchain-google-vertexai</code>, <code>langchain-google-gauth</code>, etc.)</td>
+<td>v0.2–v0.3</td>
+<td>Consolidated <code>langchain-google-genai</code> v4.0+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Rule:</strong> If a tutorial uses any import from the left column, it is outdated. Translate to the current equivalent.</p>
+<hr />
+<h2 id="the-langchain-ecosystem-reference-map">The LangChain Ecosystem — Reference Map</h2>
+<p>Before starting any phase, the learner should understand what each package does:</p>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Role</th>
+<th>Analogy</th>
+<th>Install</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>langchain-core</code></td>
+<td>Base interfaces, message types, tool schemas</td>
+<td>The grammar of the language</td>
+<td><code>pip install langchain-core</code></td>
+</tr>
+<tr>
+<td><code>langchain</code></td>
+<td>High-level agents, chains, middleware, prompt templates</td>
+<td>The standard library</td>
+<td><code>pip install langchain</code></td>
+</tr>
+<tr>
+<td><code>langchain-google-genai</code></td>
+<td>Gemini model wrappers (<code>ChatGoogleGenerativeAI</code>)</td>
+<td>The Gemini driver</td>
+<td><code>pip install langchain-google-genai</code></td>
+</tr>
+<tr>
+<td><code>langgraph</code></td>
+<td>Graph-based orchestration, state machines, persistence</td>
+<td>The workflow engine</td>
+<td><code>pip install langgraph</code></td>
+</tr>
+<tr>
+<td><code>langsmith</code></td>
+<td>Tracing, observability, evaluation, debugging</td>
+<td>Your AI app's debugger + APM</td>
+<td><code>pip install langsmith</code></td>
+</tr>
+<tr>
+<td><code>langchain-community</code></td>
+<td>Third-party integrations (vector DBs, doc loaders)</td>
+<td>The plugin ecosystem</td>
+<td><code>pip install langchain-community</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-langchain-evolved-context-for-the-learner">How LangChain Evolved — Context For The Learner</h2>
+<p>Teach this as background in Phase 0, Step 1. The learner asked to understand the evolution.</p>
+<h3 id="era-1-the-wild-west-late-2022-early-2023-deprecated">Era 1: The Wild West (Late 2022 — Early 2023) <code>⛔ DEPRECATED</code></h3>
+<p>LangChain launched as a single Python package for chaining LLM calls. Everything was monolithic. Agents used <code>initialize_agent()</code> and <code>AgentExecutor</code> with hardcoded reasoning loops. Memory was <code>ConversationBufferMemory</code>. It worked for prototyping but was rigid and hard to customize.</p>
+<h3 id="era-2-lcel-the-split-mid-2023-early-2024-deprecated">Era 2: LCEL &amp; The Split (Mid 2023 — Early 2024) <code>⛔ DEPRECATED</code></h3>
+<p>LangChain Expression Language (LCEL) introduced pipe syntax: <code>prompt | llm | parser</code>. The monolith split into <code>langchain-core</code>, <code>langchain-community</code>, and provider packages. LangServe arrived for API deployment. LCEL was clever but divisive — elegant for simple chains, confusing for complex ones.</p>
+<h3 id="era-3-v02-langgraph-rises-may-2024-deprecated">Era 3: v0.2 + LangGraph Rises (May 2024) <code>⛔ DEPRECATED</code></h3>
+<p><code>AgentExecutor</code> and <code>initialize_agent()</code> officially deprecated. LangGraph became the recommended agent framework — graph-based architecture with state, cycles, and persistence. LangSmith launched for observability.</p>
+<h3 id="era-4-v03-consolidation-late-2024-mid-2025">Era 4: v0.3 + Consolidation (Late 2024 — Mid 2025)</h3>
+<p>Further cleanup. LangGraph matured with human-in-the-loop and durable state. <code>langchain-google-genai</code> v4.0.0 migrated to the consolidated <code>google-genai</code> SDK, unifying Gemini Developer API and Vertex AI.</p>
+<h3 id="era-5-langchain-10-langgraph-10-september-2025-now-current">Era 5: LangChain 1.0 + LangGraph 1.0 (September 2025 — Now) <code>✅ CURRENT</code></h3>
+<p>First stable major release. LCEL pipe syntax deprecated. Agents defined within LangChain (not LangGraph prebuilts). New middleware system. Context engineering is the core design philosophy. LangGraph is the low-level orchestration engine underneath. 90M+ monthly downloads.</p>
+<hr />
+<h2 id="phase-0-environment-first-contact">Phase 0: Environment &amp; First Contact</h2>
+<p><strong>Duration:</strong> 2–3 days | <strong>Prerequisites:</strong> Python 3.10+, pip, a code editor, Google AI Studio API key</p>
+<p><strong>Goal:</strong> Working Gemini call through LangChain. Understand what the abstraction layer does.</p>
+<h3 id="step-01-the-evolution-story">Step 0.1 — The Evolution Story</h3>
+<p><strong>Teach:</strong> Walk the learner through the "How LangChain Evolved" section above. Explain each era briefly. Emphasize why understanding this matters (most tutorials online are outdated).</p>
+<p><strong>Completion Check:</strong> Learner can explain in their own words why <code>AgentExecutor</code> was deprecated and what replaced it.</p>
+<h3 id="step-02-environment-setup">Step 0.2 — Environment Setup</h3>
+<p><strong>Teach:</strong> Guide the learner through installing the required packages:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>langchain<span class="w"> </span>langchain-core<span class="w"> </span>langchain-google-genai<span class="w"> </span>langgraph<span class="w"> </span>langsmith
+</code></pre></div>
+<p>Set environment variables:
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">GOOGLE_API_KEY</span><span class="o">=</span><span class="s2">&quot;your-key-here&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">LANGCHAIN_TRACING_V2</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="w">  </span><span class="c1"># Optional but recommended</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">LANGCHAIN_API_KEY</span><span class="o">=</span><span class="s2">&quot;your-langsmith-key&quot;</span><span class="w">  </span><span class="c1"># Optional</span>
+</code></pre></div></p>
+<p><strong>Explain:</strong> Why LangSmith tracing is worth enabling from day one (visibility into every LLM call).</p>
+<p><strong>Completion Check:</strong> <code>python -c "from langchain_google_genai import ChatGoogleGenerativeAI; print('OK')"</code> runs without errors.</p>
+<h3 id="step-03-first-langchain-call-with-gemini">Step 0.3 — First LangChain Call With Gemini</h3>
+<p><strong>Teach:</strong> The <code>ChatGoogleGenerativeAI</code> class. What it wraps. What <code>.invoke()</code> returns.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_google_genai</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatGoogleGenerativeAI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">HumanMessage</span><span class="p">,</span> <span class="n">SystemMessage</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">ChatGoogleGenerativeAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gemini-2.0-flash&quot;</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">invoke</span><span class="p">([</span>
+    <span class="n">SystemMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;You are a helpful assistant.&quot;</span><span class="p">),</span>
+    <span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;What is LangChain in one sentence?&quot;</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">response</span><span class="p">))</span>  <span class="c1"># AIMessage</span>
+</code></pre></div>
+<p><strong>Key Concepts to Cover:</strong>
+- Messages as typed objects: <code>HumanMessage</code>, <code>AIMessage</code>, <code>SystemMessage</code>, <code>ToolMessage</code>
+- The response is an <code>AIMessage</code> object, not a raw string
+- <code>.invoke()</code> vs <code>.stream()</code> vs <code>.batch()</code> — three calling patterns</p>
+<p><strong>Completion Check:</strong> Learner has run the code, inspected the response object, and can explain what <code>AIMessage</code> contains.</p>
+<h3 id="step-04-before-after-raw-sdk-vs-langchain">Step 0.4 — Before &amp; After: Raw SDK vs LangChain</h3>
+<p><strong>Teach:</strong> Show the same task done two ways — raw <code>google-genai</code> SDK vs LangChain wrapper. Ask the learner to identify what changed and what didn't.</p>
+<p><strong>Raw SDK version:</strong>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">google</span><span class="w"> </span><span class="kn">import</span> <span class="n">genai</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">genai</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">generate_content</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gemini-2.0-flash&quot;</span><span class="p">,</span>
+    <span class="n">contents</span><span class="o">=</span><span class="s2">&quot;What is LangChain in one sentence?&quot;</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div></p>
+<p><strong>LangChain version:</strong>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_google_genai</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatGoogleGenerativeAI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">HumanMessage</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">ChatGoogleGenerativeAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gemini-2.0-flash&quot;</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">invoke</span><span class="p">([</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;What is LangChain in one sentence?&quot;</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre></div></p>
+<p><strong>Discussion Points:</strong>
+- The LangChain version wraps the SDK — it's not doing anything magical
+- The value shows up later: swapping <code>ChatGoogleGenerativeAI</code> for any other provider's chat model requires zero changes to downstream code
+- The message format (<code>HumanMessage</code>, <code>AIMessage</code>) is universal across all providers</p>
+<p><strong>Completion Check:</strong> Learner can articulate the specific value LangChain adds over raw SDK calls (provider abstraction, standardized message format, composability with other LangChain components).</p>
+<h3 id="step-05-streaming-batch">Step 0.5 — Streaming &amp; Batch</h3>
+<p><strong>Teach:</strong> The other two calling patterns.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Streaming</span>
+<span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">stream</span><span class="p">([</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;Explain embeddings briefly&quot;</span><span class="p">)]):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">chunk</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Batch</span>
+<span class="n">responses</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">batch</span><span class="p">([</span>
+    <span class="p">[</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;Capital of France?&quot;</span><span class="p">)],</span>
+    <span class="p">[</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;Capital of Japan?&quot;</span><span class="p">)],</span>
+<span class="p">])</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">responses</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Key Insight:</strong> These three patterns (invoke/stream/batch) work identically across <em>every</em> LangChain component — models, chains, agents. Learn them once, use them everywhere.</p>
+<p><strong>Completion Check:</strong> Learner has run both patterns and understands when to use each (invoke for single calls, stream for real-time UX, batch for parallel processing).</p>
+<h3 id="phase-0-checkpoint-project">🔨 Phase 0 Checkpoint Project</h3>
+<p><strong>Task:</strong> Take one feature from the learner's existing bot (e.g., a knowledge query or game strategy response) and rewrite it using LangChain's <code>ChatGoogleGenerativeAI</code> instead of raw API calls. The goal is NOT to make it better — it's to see the abstraction layer in action.</p>
+<p><strong>Completion Criteria:</strong>
+- Working code that produces the same output as the raw SDK version
+- Learner can explain what LangChain added and what it cost (slightly more boilerplate, but gained standardized interfaces)</p>
+<hr />
+<h2 id="phase-1-core-abstractions-prompts-parsing-tools">Phase 1: Core Abstractions — Prompts, Parsing, Tools</h2>
+<p><strong>Duration:</strong> 1–2 weeks | <strong>Prerequisites:</strong> Phase 0 complete</p>
+<p><strong>Goal:</strong> Understand and use LangChain's composable building blocks with Gemini.</p>
+<h3 id="step-11-prompt-templates-why-not-f-strings">Step 1.1 — Prompt Templates: Why Not F-Strings?</h3>
+<p><strong>Teach:</strong> <code>ChatPromptTemplate</code> and why it exists.</p>
+<p><strong>First-Principles Setup:</strong> Ask the learner: "If you have a prompt that needs to change based on user input, how would you build it with Python?" They'll say f-strings or <code>.format()</code>. Then show the problems: no validation, no reusability, no type safety, can't compose templates.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.prompts</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_messages</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;You are an expert on </span><span class="si">{topic}</span><span class="s2">. Respond concisely.&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;human&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{question}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="c1"># This is a reusable template — not yet a string</span>
+<span class="n">formatted</span> <span class="o">=</span> <span class="n">prompt</span><span class="o">.</span><span class="n">format_messages</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">&quot;game strategy&quot;</span><span class="p">,</span> <span class="n">question</span><span class="o">=</span><span class="s2">&quot;When should I retreat?&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">formatted</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Key Concepts:</strong>
+- Templates are objects, not strings — they validate inputs, can be composed, and are serializable
+- <code>from_messages()</code> accepts tuples <code>(role, content)</code> as shorthand
+- Templates separate prompt <em>design</em> from prompt <em>execution</em></p>
+<p><strong>Completion Check:</strong> Learner can create a multi-variable template and explain why it's better than f-strings for production use.</p>
+<h3 id="step-12-messagesplaceholder-dynamic-history">Step 1.2 — MessagesPlaceholder &amp; Dynamic History</h3>
+<p><strong>Teach:</strong> How to inject conversation history or other dynamic message lists into a template.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.prompts</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatPromptTemplate</span><span class="p">,</span> <span class="n">MessagesPlaceholder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">HumanMessage</span><span class="p">,</span> <span class="n">AIMessage</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_messages</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;You are a helpful game strategy advisor.&quot;</span><span class="p">),</span>
+    <span class="n">MessagesPlaceholder</span><span class="p">(</span><span class="n">variable_name</span><span class="o">=</span><span class="s2">&quot;history&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;human&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{input}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="n">messages</span> <span class="o">=</span> <span class="n">prompt</span><span class="o">.</span><span class="n">format_messages</span><span class="p">(</span>
+    <span class="n">history</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;What&#39;s the best formation for PvP?&quot;</span><span class="p">),</span>
+        <span class="n">AIMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;A balanced frontline with ranged support works well.&quot;</span><span class="p">)</span>
+    <span class="p">],</span>
+    <span class="nb">input</span><span class="o">=</span><span class="s2">&quot;What if they rush me early?&quot;</span>
+<span class="p">)</span>
+</code></pre></div>
+<p><strong>Key Insight:</strong> <code>MessagesPlaceholder</code> is how LangChain handles conversation context. It's a slot where you can inject any list of messages — history, retrieved context, few-shot examples, etc.</p>
+<p><strong>Completion Check:</strong> Learner can build a template with dynamic history injection and understands why this matters for chatbots and agents.</p>
+<h3 id="step-13-output-parsing-from-prose-to-data">Step 1.3 — Output Parsing: From Prose to Data</h3>
+<p><strong>Teach:</strong> Why LLM output needs parsing, and the tools LangChain provides.</p>
+<p><strong>First-Principles Setup:</strong> "Your LLM returns a string. But your app needs a Python dict, a list, or a Pydantic model. Parsing is the bridge."</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.output_parsers</span><span class="w"> </span><span class="kn">import</span> <span class="n">StrOutputParser</span><span class="p">,</span> <span class="n">JsonOutputParser</span>
+
+<span class="c1"># Simple string parsing</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">StrOutputParser</span><span class="p">()</span>
+<span class="c1"># This just extracts .content from AIMessage — trivial but consistent</span>
+
+<span class="c1"># JSON parsing</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.pydantic_v1</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">GameUnit</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Unit name&quot;</span><span class="p">)</span>
+    <span class="n">tier</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Unit tier: S/A/B/C&quot;</span><span class="p">)</span>
+    <span class="n">role</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Primary role in battle&quot;</span><span class="p">)</span>
+
+<span class="n">json_parser</span> <span class="o">=</span> <span class="n">JsonOutputParser</span><span class="p">(</span><span class="n">pydantic_object</span><span class="o">=</span><span class="n">GameUnit</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">json_parser</span><span class="o">.</span><span class="n">get_format_instructions</span><span class="p">())</span>
+<span class="c1"># This generates instructions you can inject into the prompt</span>
+</code></pre></div>
+<p><strong>Completion Check:</strong> Learner understands the difference between <code>StrOutputParser</code>, <code>JsonOutputParser</code>, and <code>PydanticOutputParser</code>, and knows when to use each.</p>
+<h3 id="step-14-structured-output-the-modern-way">Step 1.4 — Structured Output: The Modern Way</h3>
+<p><strong>Teach:</strong> <code>.with_structured_output()</code> — the 1.0 way to get typed responses.</p>
+<p><strong>Key Insight:</strong> Instead of parsing free-text LLM output, you can tell Gemini to <em>generate</em> structured output natively using its schema/function-calling capabilities. This is more reliable than parsing.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_google_genai</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatGoogleGenerativeAI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">GameStrategy</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">formation</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Recommended formation name&quot;</span><span class="p">)</span>
+    <span class="n">risk_level</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;low, medium, or high&quot;</span><span class="p">)</span>
+    <span class="n">reasoning</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Why this formation works&quot;</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">ChatGoogleGenerativeAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gemini-2.0-flash&quot;</span><span class="p">)</span>
+<span class="n">structured_model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">with_structured_output</span><span class="p">(</span><span class="n">GameStrategy</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">structured_model</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="s2">&quot;Best formation against a cavalry rush in a strategy game?&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># This is a GameStrategy instance, not a string</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">formation</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">risk_level</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Discussion:</strong> Under the hood, <code>.with_structured_output()</code> uses Gemini's function calling / controlled generation to constrain the output to the schema. This is more reliable than asking the LLM to output JSON and then parsing it.</p>
+<p><strong>Completion Check:</strong> Learner has used <code>.with_structured_output()</code> with a custom Pydantic model and understands why this is preferred over output parsers for production.</p>
+<h3 id="step-15-tool-calling-making-the-llm-do-things">Step 1.5 — Tool Calling: Making the LLM Do Things</h3>
+<p><strong>Teach:</strong> The <code>@tool</code> decorator and how LangChain converts Python functions into LLM-callable tools.</p>
+<p><strong>First-Principles Setup:</strong> "An LLM can only generate text. But what if you want it to search a database, call an API, or do math? You give it <em>tools</em> — functions it can choose to call. The LLM doesn't execute the function — it outputs a structured request saying 'I want to call this function with these arguments.' Your code then executes it."</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">tool</span>
+
+<span class="nd">@tool</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">search_knowledge_base</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Search the game knowledge base for information about units, strategies, or mechanics.&quot;&quot;&quot;</span>
+    <span class="c1"># In reality, this would search a database</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Result for &#39;</span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&#39;: [mock data about game mechanics]&quot;</span>
+
+<span class="nd">@tool</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_damage</span><span class="p">(</span><span class="n">attack</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">defense</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">multiplier</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate damage dealt given attack power, defense value, and optional multiplier.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">attack</span> <span class="o">-</span> <span class="n">defense</span><span class="p">)</span> <span class="o">*</span> <span class="n">multiplier</span><span class="p">)</span>
+
+<span class="c1"># Inspect what LangChain generated</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">search_knowledge_base</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">search_knowledge_base</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">search_knowledge_base</span><span class="o">.</span><span class="n">args_schema</span><span class="o">.</span><span class="n">schema</span><span class="p">())</span>
+</code></pre></div>
+<p><strong>Key Insight:</strong> The <code>@tool</code> decorator reads your function's name, docstring, and type hints to generate a JSON schema. The docstring is critical — it's what the LLM reads to decide <em>when</em> to use the tool. Bad descriptions = bad tool selection.</p>
+<p><strong>Completion Check:</strong> Learner can create custom tools, inspect their schemas, and explain why the docstring matters.</p>
+<h3 id="step-16-binding-tools-to-a-model">Step 1.6 — Binding Tools to a Model</h3>
+<p><strong>Teach:</strong> <code>.bind_tools()</code> and executing tool calls.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_google_genai</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatGoogleGenerativeAI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">HumanMessage</span><span class="p">,</span> <span class="n">ToolMessage</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">ChatGoogleGenerativeAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gemini-2.0-flash&quot;</span><span class="p">)</span>
+<span class="n">model_with_tools</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">bind_tools</span><span class="p">([</span><span class="n">search_knowledge_base</span><span class="p">,</span> <span class="n">calculate_damage</span><span class="p">])</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">model_with_tools</span><span class="o">.</span><span class="n">invoke</span><span class="p">([</span>
+    <span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;How much damage does a unit with 500 attack do against 200 defense?&quot;</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">)</span>  <span class="c1"># The LLM chose to call calculate_damage</span>
+</code></pre></div>
+<p><strong>Then show the full loop:</strong> LLM requests tool call → your code executes it → you send the result back as a <code>ToolMessage</code> → LLM generates final answer.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># If the LLM made a tool call, execute it and send result back</span>
+<span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">:</span>
+    <span class="n">tool_call</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># Execute the tool</span>
+    <span class="k">if</span> <span class="n">tool_call</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;calculate_damage&quot;</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">calculate_damage</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">tool_call</span><span class="p">[</span><span class="s2">&quot;args&quot;</span><span class="p">])</span>
+
+    <span class="c1"># Send result back to the LLM</span>
+    <span class="n">followup</span> <span class="o">=</span> <span class="n">model_with_tools</span><span class="o">.</span><span class="n">invoke</span><span class="p">([</span>
+        <span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;How much damage does a unit with 500 attack do against 200 defense?&quot;</span><span class="p">),</span>
+        <span class="n">response</span><span class="p">,</span>  <span class="c1"># The AIMessage with tool_calls</span>
+        <span class="n">ToolMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">),</span> <span class="n">tool_call_id</span><span class="o">=</span><span class="n">tool_call</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">])</span>
+    <span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">followup</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Key Insight:</strong> This manual tool-call loop is exactly what agents automate. In Phase 3, you'll see how agents handle this loop for you — but understanding the manual version is essential.</p>
+<p><strong>Completion Check:</strong> Learner has completed a full tool-call round trip and understands the message flow: Human → AI (tool request) → Tool (result) → AI (final answer).</p>
+<h3 id="step-17-document-loading-text-splitting">Step 1.7 — Document Loading &amp; Text Splitting</h3>
+<p><strong>Teach:</strong> How LangChain loads and chunks documents for downstream use (especially RAG in Phase 2).</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_community.document_loaders</span><span class="w"> </span><span class="kn">import</span> <span class="n">TextLoader</span><span class="p">,</span> <span class="n">PyPDFLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_text_splitters</span><span class="w"> </span><span class="kn">import</span> <span class="n">RecursiveCharacterTextSplitter</span>
+
+<span class="c1"># Load a text file</span>
+<span class="n">loader</span> <span class="o">=</span> <span class="n">TextLoader</span><span class="p">(</span><span class="s2">&quot;knowledge_base.txt&quot;</span><span class="p">)</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">docs</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>  <span class="c1"># Document(page_content=..., metadata=...)</span>
+
+<span class="c1"># Split into chunks</span>
+<span class="n">splitter</span> <span class="o">=</span> <span class="n">RecursiveCharacterTextSplitter</span><span class="p">(</span>
+    <span class="n">chunk_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+    <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">separators</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;. &quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">chunks</span> <span class="o">=</span> <span class="n">splitter</span><span class="o">.</span><span class="n">split_documents</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Split into </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span><span class="si">}</span><span class="s2"> chunks&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chunks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">page_content</span><span class="p">[:</span><span class="mi">200</span><span class="p">])</span>
+</code></pre></div>
+<p><strong>First-Principles Explanation:</strong> "LLMs have finite context windows. If your document is 50,000 tokens but your model only handles 8,000, you can't feed it all at once. Chunking breaks the document into pieces small enough to fit in context. The art is choosing chunk sizes and overlap so that meaning isn't lost at chunk boundaries."</p>
+<p><strong>Key Concepts:</strong>
+- <code>Document</code> object: <code>page_content</code> (text) + <code>metadata</code> (source, page number, etc.)
+- <code>RecursiveCharacterTextSplitter</code>: tries to split at natural boundaries (paragraphs → sentences → words)
+- Chunk size vs overlap: overlap prevents losing context at boundaries</p>
+<p><strong>Completion Check:</strong> Learner can load a document, split it, and explain why chunk_size and chunk_overlap matter.</p>
+<h3 id="phase-1-checkpoint-project">🔨 Phase 1 Checkpoint Project</h3>
+<p><strong>Task:</strong> Build a structured data extractor:
+1. Load a document (e.g., game patch notes, a changelog, or any text file)
+2. Use <code>ChatGoogleGenerativeAI</code> + <code>.with_structured_output()</code> to extract structured fields into Pydantic models
+3. Create two custom tools that operate on the extracted data (e.g., search by version, filter by change type)
+4. Wire the tools to the model with <code>.bind_tools()</code> and complete a full tool-call round trip</p>
+<p><strong>Completion Criteria:</strong>
+- Pydantic models validate the extracted data
+- Tool calls work end-to-end
+- Learner can explain the message flow and why structured output is preferred over string parsing</p>
+<hr />
+<h2 id="phase-2-rag-retrieval-augmented-generation">Phase 2: RAG — Retrieval Augmented Generation</h2>
+<p><strong>Duration:</strong> 2–3 weeks | <strong>Prerequisites:</strong> Phase 1 complete</p>
+<p><strong>Goal:</strong> Build a working RAG pipeline with Gemini embeddings and vector search.</p>
+<h3 id="step-21-what-are-embeddings-first-principles">Step 2.1 — What Are Embeddings? (First Principles)</h3>
+<p><strong>Teach:</strong> Embeddings from the ground up. Do NOT assume prior knowledge.</p>
+<p><strong>Mental Model:</strong> "Imagine you could place every sentence ever written as a point in a 768-dimensional space, where sentences with similar meaning are physically close together. That's what an embedding model does — it converts text into a list of numbers (a vector) such that similar texts produce similar vectors."</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_google_genai</span><span class="w"> </span><span class="kn">import</span> <span class="n">GoogleGenerativeAIEmbeddings</span>
+
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">GoogleGenerativeAIEmbeddings</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;models/text-embedding-004&quot;</span><span class="p">)</span>
+
+<span class="c1"># Embed a single query</span>
+<span class="n">query_vector</span> <span class="o">=</span> <span class="n">embeddings</span><span class="o">.</span><span class="n">embed_query</span><span class="p">(</span><span class="s2">&quot;best defensive formation&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dimensions: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">query_vector</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;First 5 values: </span><span class="si">{</span><span class="n">query_vector</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Embed multiple documents</span>
+<span class="n">doc_vectors</span> <span class="o">=</span> <span class="n">embeddings</span><span class="o">.</span><span class="n">embed_documents</span><span class="p">([</span>
+    <span class="s2">&quot;Turtle formation is the best defense against ranged attacks&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Pancakes are delicious with maple syrup&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Shield wall provides excellent frontline protection&quot;</span>
+<span class="p">])</span>
+
+<span class="c1"># Show that similar texts have similar vectors</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">dot</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cosine_sim</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Query vs Defense text: </span><span class="si">{</span><span class="n">cosine_sim</span><span class="p">(</span><span class="n">query_vector</span><span class="p">,</span><span class="w"> </span><span class="n">doc_vectors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Query vs Pancakes text: </span><span class="si">{</span><span class="n">cosine_sim</span><span class="p">(</span><span class="n">query_vector</span><span class="p">,</span><span class="w"> </span><span class="n">doc_vectors</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Query vs Shield text: </span><span class="si">{</span><span class="n">cosine_sim</span><span class="p">(</span><span class="n">query_vector</span><span class="p">,</span><span class="w"> </span><span class="n">doc_vectors</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Key Concepts:</strong>
+- Embeddings map text → vector (list of floats)
+- Cosine similarity measures how "related" two vectors are (1.0 = identical, 0.0 = unrelated)
+- <code>embed_query()</code> vs <code>embed_documents()</code> — some models use different encoding strategies for queries vs documents</p>
+<p><strong>Completion Check:</strong> Learner runs the similarity demo and intuitively understands that embeddings capture semantic meaning as geometric distance.</p>
+<h3 id="step-22-vector-stores-your-semantic-database">Step 2.2 — Vector Stores: Your Semantic Database</h3>
+<p><strong>Teach:</strong> What vector databases are and why they exist.</p>
+<p><strong>First-Principles:</strong> "A regular database indexes by exact match (SQL WHERE clause). A vector database indexes by <em>similarity</em> — you give it a vector, and it returns the most similar vectors it has stored. This is called Approximate Nearest Neighbor (ANN) search."</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># pip install chromadb</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_google_genai</span><span class="w"> </span><span class="kn">import</span> <span class="n">GoogleGenerativeAIEmbeddings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_community.vectorstores</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chroma</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.documents</span><span class="w"> </span><span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">GoogleGenerativeAIEmbeddings</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;models/text-embedding-004&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create documents</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Document</span><span class="p">(</span><span class="n">page_content</span><span class="o">=</span><span class="s2">&quot;Cavalry units are fast but fragile against spearmen&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;unit&quot;</span><span class="p">,</span> <span class="s2">&quot;tier&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">}),</span>
+    <span class="n">Document</span><span class="p">(</span><span class="n">page_content</span><span class="o">=</span><span class="s2">&quot;Archers deal high damage from range but need protection&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;unit&quot;</span><span class="p">,</span> <span class="s2">&quot;tier&quot;</span><span class="p">:</span> <span class="s2">&quot;S&quot;</span><span class="p">}),</span>
+    <span class="n">Document</span><span class="p">(</span><span class="n">page_content</span><span class="o">=</span><span class="s2">&quot;Shield bearers are slow but absorb massive damage&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;unit&quot;</span><span class="p">,</span> <span class="s2">&quot;tier&quot;</span><span class="p">:</span> <span class="s2">&quot;B&quot;</span><span class="p">}),</span>
+    <span class="n">Document</span><span class="p">(</span><span class="n">page_content</span><span class="o">=</span><span class="s2">&quot;The flanking maneuver works best with fast cavalry&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;strategy&quot;</span><span class="p">,</span> <span class="s2">&quot;tier&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">}),</span>
+<span class="p">]</span>
+
+<span class="c1"># Create vector store and add documents</span>
+<span class="n">vectorstore</span> <span class="o">=</span> <span class="n">Chroma</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">embeddings</span><span class="p">,</span> <span class="n">collection_name</span><span class="o">=</span><span class="s2">&quot;game_kb&quot;</span><span class="p">)</span>
+
+<span class="c1"># Query by similarity</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">vectorstore</span><span class="o">.</span><span class="n">similarity_search</span><span class="p">(</span><span class="s2">&quot;How to counter ranged units?&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">doc</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">doc</span><span class="o">.</span><span class="n">page_content</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Key Concepts:</strong>
+- <code>Chroma</code> is local, zero-config — perfect for learning. Production alternatives: Pinecone, Weaviate, pgvector
+- <code>from_documents()</code> embeds and stores in one step
+- <code>similarity_search(query, k)</code> returns the k most similar documents
+- Metadata filtering is available for narrowing searches</p>
+<p><strong>Completion Check:</strong> Learner has a working Chroma store, can add documents, and query by similarity. They understand this is the "retrieval" in RAG.</p>
+<h3 id="step-23-retrievers-the-langchain-interface">Step 2.3 — Retrievers: The LangChain Interface</h3>
+<p><strong>Teach:</strong> Retrievers as the standardized interface between vector stores and the rest of LangChain.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Convert vector store to a retriever</span>
+<span class="n">retriever</span> <span class="o">=</span> <span class="n">vectorstore</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">(</span>
+    <span class="n">search_type</span><span class="o">=</span><span class="s2">&quot;similarity&quot;</span><span class="p">,</span>  <span class="c1"># or &quot;mmr&quot; for diversity</span>
+    <span class="n">search_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># Use it</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="n">retriever</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="s2">&quot;fast attack strategy&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">page_content</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Key Concepts:</strong>
+- A retriever is a standardized interface — any component that "gets documents given a query"
+- <code>similarity</code> = pure closest match; <code>mmr</code> (Maximum Marginal Relevance) = balances relevance with diversity
+- Retrievers are composable — they plug into chains and agents seamlessly</p>
+<p><strong>Completion Check:</strong> Learner understands the difference between a vector store and a retriever, and can explain why the abstraction layer exists.</p>
+<h3 id="step-24-the-complete-rag-pipeline">Step 2.4 — The Complete RAG Pipeline</h3>
+<p><strong>Teach:</strong> Putting it all together: Load → Split → Embed → Store → Retrieve → Augment → Generate.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_google_genai</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatGoogleGenerativeAI</span><span class="p">,</span> <span class="n">GoogleGenerativeAIEmbeddings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_community.vectorstores</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chroma</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.prompts</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">HumanMessage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_community.document_loaders</span><span class="w"> </span><span class="kn">import</span> <span class="n">TextLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_text_splitters</span><span class="w"> </span><span class="kn">import</span> <span class="n">RecursiveCharacterTextSplitter</span>
+
+<span class="c1"># 1. LOAD</span>
+<span class="n">loader</span> <span class="o">=</span> <span class="n">TextLoader</span><span class="p">(</span><span class="s2">&quot;game_knowledge.txt&quot;</span><span class="p">)</span>
+<span class="n">raw_docs</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+<span class="c1"># 2. SPLIT</span>
+<span class="n">splitter</span> <span class="o">=</span> <span class="n">RecursiveCharacterTextSplitter</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">chunks</span> <span class="o">=</span> <span class="n">splitter</span><span class="o">.</span><span class="n">split_documents</span><span class="p">(</span><span class="n">raw_docs</span><span class="p">)</span>
+
+<span class="c1"># 3. EMBED + STORE</span>
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">GoogleGenerativeAIEmbeddings</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;models/text-embedding-004&quot;</span><span class="p">)</span>
+<span class="n">vectorstore</span> <span class="o">=</span> <span class="n">Chroma</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span><span class="n">chunks</span><span class="p">,</span> <span class="n">embeddings</span><span class="p">)</span>
+
+<span class="c1"># 4. RETRIEVE</span>
+<span class="n">retriever</span> <span class="o">=</span> <span class="n">vectorstore</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">(</span><span class="n">search_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">})</span>
+
+<span class="c1"># 5. AUGMENT + GENERATE</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ChatGoogleGenerativeAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gemini-2.0-flash&quot;</span><span class="p">)</span>
+
+<span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;What&#39;s the best counter to cavalry?&quot;</span>
+<span class="n">retrieved_docs</span> <span class="o">=</span> <span class="n">retriever</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+<span class="n">context</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">doc</span><span class="o">.</span><span class="n">page_content</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">retrieved_docs</span><span class="p">])</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_messages</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;Answer the question based on the following context. If the context doesn&#39;t contain the answer, say so.</span><span class="se">\n\n</span><span class="s2">Context:</span><span class="se">\n</span><span class="si">{context}</span><span class="s2">&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;human&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{question}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="n">messages</span> <span class="o">=</span> <span class="n">prompt</span><span class="o">.</span><span class="n">format_messages</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span> <span class="n">question</span><span class="o">=</span><span class="n">question</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Discussion Points:</strong>
+- This is a <em>manual</em> RAG pipeline — each step is explicit. LangChain offers higher-level chains, but understanding the manual version is essential.
+- The quality of RAG depends heavily on: chunk size, embedding model quality, retriever strategy, and the system prompt that tells the LLM how to use the context.
+- Compare: ask the same question WITHOUT context (just the model's knowledge) vs WITH context. The difference is RAG's value.</p>
+<p><strong>Completion Check:</strong> Learner has a working end-to-end RAG pipeline and can explain each step's purpose.</p>
+<h3 id="step-25-rag-evaluation-basics">Step 2.5 — RAG Evaluation Basics</h3>
+<p><strong>Teach:</strong> How to know if your RAG is working (beyond "it looks right").</p>
+<p><strong>Key Metrics:</strong>
+- <strong>Retrieval Relevance:</strong> Are the retrieved chunks actually relevant to the question?
+- <strong>Faithfulness:</strong> Does the generated answer stick to the retrieved context, or does it hallucinate?
+- <strong>Answer Quality:</strong> Is the answer correct and useful?</p>
+<p><strong>Simple evaluation approach:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Manual evaluation: check if retrieved context is relevant</span>
+<span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;Best defense against archers?&quot;</span>
+<span class="n">retrieved</span> <span class="o">=</span> <span class="n">retriever</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">doc</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">retrieved</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chunk </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">doc</span><span class="o">.</span><span class="n">page_content</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+    <span class="c1"># Ask yourself: Is this relevant to the question?</span>
+</code></pre></div></p>
+<p><strong>Mention:</strong> LangSmith's eval catalog has built-in RAG evaluators (cover in detail in Phase 4).</p>
+<p><strong>Completion Check:</strong> Learner can manually evaluate retrieval quality and understands the three key metrics.</p>
+<h3 id="phase-2-checkpoint-project">🔨 Phase 2 Checkpoint Project</h3>
+<p><strong>Task:</strong> Build an IK Knowledge Base Q&amp;A system:
+1. Take existing game knowledge base documents (text, markdown, or any format)
+2. Load, split, and embed them into a Chroma vector store
+3. Build a RAG pipeline that answers strategy questions with source citations
+4. Test with 5+ questions and evaluate: Are the retrieved chunks relevant? Does the answer stay faithful to the context?</p>
+<p><strong>Bonus:</strong> Compare answers from pure Gemini (no RAG) vs RAG-augmented Gemini on the same questions. Document the differences.</p>
+<p><strong>Completion Criteria:</strong>
+- End-to-end RAG pipeline works
+- Learner can articulate where the pipeline is weak (bad chunks, irrelevant retrieval, hallucination) and has ideas for improvement</p>
+<hr />
+<h2 id="phase-3-agents-langgraph-where-it-gets-real">Phase 3: Agents &amp; LangGraph — Where It Gets Real</h2>
+<p><strong>Duration:</strong> 3–4 weeks | <strong>Prerequisites:</strong> Phase 2 complete</p>
+<p><strong>Goal:</strong> Build stateful, multi-step agents that reason, use tools, and persist state.</p>
+<h3 id="step-31-the-react-pattern-first-principles">Step 3.1 — The ReAct Pattern (First Principles)</h3>
+<p><strong>Teach:</strong> The fundamental agent loop — Reason + Act — without any framework code first.</p>
+<p><strong>Mental Model:</strong> "A chain runs once: input → output. An agent runs in a <em>loop</em>: Think → Decide what to do → Do it → Observe the result → Think again → Maybe do something else → Eventually produce a final answer. The LLM is the 'brain' that does the thinking and deciding. Tools are the 'hands' that do the actions."</p>
+<p><strong>Draw the loop:</strong>
+<div class="highlight"><pre><span></span><code>User Question
+    ↓
+[THINK] LLM reasons about the question
+    ↓
+[ACT] LLM chooses a tool and provides arguments
+    ↓
+[OBSERVE] Tool executes, result comes back
+    ↓
+[THINK] LLM reasons about the tool result
+    ↓
+→ If done: produce final answer
+→ If not: go back to [ACT] with new tool call
+</code></pre></div></p>
+<p><strong>Key Insight:</strong> This is why chains aren't enough — chains are linear (A → B → C). Agents need cycles (A → B → C → maybe B again → D). This is also why LangGraph uses <em>graphs</em> — graphs naturally support cycles.</p>
+<p><strong>Completion Check:</strong> Learner can explain the ReAct loop from memory and articulate why linear chains can't implement it.</p>
+<h3 id="step-32-your-first-agent-in-langchain-10">Step 3.2 — Your First Agent in LangChain 1.0</h3>
+<p><strong>Teach:</strong> <code>create_react_agent()</code> from <code>langchain.agents</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain.agents</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_react_agent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_google_genai</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatGoogleGenerativeAI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">tool</span>
+
+<span class="nd">@tool</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">search_game_wiki</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Search the game wiki for information about units, strategies, or game mechanics.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Wiki result for &#39;</span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&#39;: [mock game data]&quot;</span>
+
+<span class="nd">@tool</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_stats</span><span class="p">(</span><span class="n">base</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">bonus_percent</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate a stat value with percentage bonus applied.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">base</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">bonus_percent</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">ChatGoogleGenerativeAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gemini-2.0-flash&quot;</span><span class="p">)</span>
+<span class="n">agent</span> <span class="o">=</span> <span class="n">create_react_agent</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="p">[</span><span class="n">search_game_wiki</span><span class="p">,</span> <span class="n">calculate_stats</span><span class="p">])</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;messages&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;What&#39;s the attack stat of a cavalry unit with base 300 and a 25% bonus?&quot;</span><span class="p">}]}</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">content</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nb">hasattr</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;content&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Key Concepts:</strong>
+- <code>create_react_agent()</code> builds a complete ReAct agent — the loop from Step 3.1 is automated
+- Under the hood, this creates a LangGraph graph (you don't need to know LangGraph to use it)
+- The agent decides which tools to call, in what order, and when to stop</p>
+<p><strong>Completion Check:</strong> Learner has a working agent that selects and uses tools autonomously.</p>
+<h3 id="step-33-middleware-injecting-custom-logic">Step 3.3 — Middleware: Injecting Custom Logic</h3>
+<p><strong>Teach:</strong> LangChain 1.0's middleware system for pre/post-processing in the agent loop.</p>
+<p><strong>Explain:</strong> "In 1.0, you can inject custom logic <em>into</em> the agent loop without needing to drop down to LangGraph. Middleware runs before/after LLM calls or tool executions."</p>
+<p><em>(Teach the middleware API with a concrete example — e.g., logging every tool call, or validating tool inputs before execution.)</em></p>
+<p><strong>Completion Check:</strong> Learner can add a middleware to their agent and understands when middleware suffices vs when they need LangGraph.</p>
+<h3 id="step-34-langgraph-fundamentals-why-graphs">Step 3.4 — LangGraph Fundamentals: Why Graphs?</h3>
+<p><strong>Teach:</strong> LangGraph from first principles. Start with the "why" — don't jump to code.</p>
+<p><strong>First-Principles:</strong> "LangChain's <code>create_react_agent()</code> is great for simple agents. But what if you need: multiple agents talking to each other? A human approval step before a dangerous action? Different logic paths based on the agent's confidence? Retry logic with backoff? State that persists across server restarts? That's LangGraph — it gives you a graph where each node is a step, each edge is a decision, and the state flows through the graph."</p>
+<p><strong>Key Primitives:</strong>
+- <strong>Nodes:</strong> Functions that process state (e.g., "call LLM", "execute tool", "ask human")
+- <strong>Edges:</strong> Connections between nodes (unconditional or conditional)
+- <strong>State:</strong> A typed dictionary that flows through the graph, accumulating information
+- <strong>Conditional Edges:</strong> "If X, go to node A; if Y, go to node B" — this is how agents make decisions</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">StateGraph</span><span class="p">,</span> <span class="n">END</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypedDict</span><span class="p">,</span> <span class="n">Annotated</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseMessage</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">operator</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AgentState</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">messages</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">BaseMessage</span><span class="p">],</span> <span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">]</span>
+
+<span class="c1"># Define nodes</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">call_model</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AgentState</span><span class="p">:</span>
+    <span class="c1"># LLM logic here</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">use_tool</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AgentState</span><span class="p">:</span>
+    <span class="c1"># Tool execution here</span>
+    <span class="k">pass</span>
+
+<span class="c1"># Build graph</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">StateGraph</span><span class="p">(</span><span class="n">AgentState</span><span class="p">)</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;agent&quot;</span><span class="p">,</span> <span class="n">call_model</span><span class="p">)</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;tools&quot;</span><span class="p">,</span> <span class="n">use_tool</span><span class="p">)</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;agent&quot;</span><span class="p">,</span> <span class="s2">&quot;tools&quot;</span><span class="p">)</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;tools&quot;</span><span class="p">,</span> <span class="s2">&quot;agent&quot;</span><span class="p">)</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">set_entry_point</span><span class="p">(</span><span class="s2">&quot;agent&quot;</span><span class="p">)</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Completion Check:</strong> Learner can draw a simple graph (nodes + edges) and explain how state flows through it.</p>
+<h3 id="step-35-building-a-custom-langgraph-agent">Step 3.5 — Building a Custom LangGraph Agent</h3>
+<p><strong>Teach:</strong> A complete, working LangGraph agent with conditional routing, tool execution, and termination.</p>
+<p><em>(Build this step by step — define state, create nodes, add conditional edges, compile, invoke. Use Gemini + custom tools. Include graph visualization via <code>.get_graph().draw_mermaid()</code> or similar.)</em></p>
+<p><strong>Completion Check:</strong> Learner has a custom LangGraph agent and can modify its graph structure (add/remove nodes, change routing logic).</p>
+<h3 id="step-36-persistence-checkpointing">Step 3.6 — Persistence &amp; Checkpointing</h3>
+<p><strong>Teach:</strong> How to save and resume agent state across sessions.</p>
+<p><strong>Key Insight:</strong> "Without persistence, if your server restarts mid-conversation, everything is lost. LangGraph's checkpointing saves the graph state at every step, so you can resume exactly where you left off."</p>
+<p><em>(Show <code>MemorySaver</code> for development and <code>SqliteSaver</code>/<code>PostgresSaver</code> for production. Demonstrate resuming a conversation from a checkpoint.)</em></p>
+<p><strong>Completion Check:</strong> Learner can persist and resume a conversation across separate Python sessions.</p>
+<h3 id="step-37-human-in-the-loop">Step 3.7 — Human-in-the-Loop</h3>
+<p><strong>Teach:</strong> Pausing agent execution for human approval.</p>
+<p><strong>Use Case:</strong> "Your agent is about to delete a record or send an email. You want a human to approve first."</p>
+<p><em>(Show <code>interrupt_before</code> / <code>interrupt_after</code> patterns in LangGraph. Demonstrate pausing, getting human input, and resuming.)</em></p>
+<p><strong>Completion Check:</strong> Learner has a working human-approval step in their graph.</p>
+<h3 id="step-38-multi-agent-patterns">Step 3.8 — Multi-Agent Patterns</h3>
+<p><strong>Teach:</strong> Supervisor and swarm architectures for multiple cooperating agents.</p>
+<p><strong>Key Concepts:</strong>
+- Supervisor: One "manager" agent delegates tasks to specialized "worker" agents
+- Swarm: Peer agents hand off to each other based on context
+- When to use each pattern</p>
+<p><em>(Build a simple supervisor agent that coordinates two specialized workers — e.g., a "research agent" and a "calculation agent" managed by an "orchestrator agent.")</em></p>
+<p><strong>Completion Check:</strong> Learner has a working multi-agent system and can explain when supervisor vs swarm patterns are appropriate.</p>
+<h3 id="phase-3-checkpoint-project">🔨 Phase 3 Checkpoint Project</h3>
+<p><strong>Task:</strong> Build a multi-tool research agent with production features:
+1. An agent that can: search the web (mock or real), query the RAG knowledge base from Phase 2, and perform calculations
+2. Orchestrated via LangGraph (custom graph, not just <code>create_react_agent</code>)
+3. Persistence: conversation survives server restarts (SQLite checkpoint)
+4. Human-in-the-loop: human approval required before any "write" action
+5. Graph visualization exported</p>
+<p><strong>Completion Criteria:</strong>
+- Custom LangGraph graph with 3+ nodes
+- Persistence works across sessions
+- Human approval step functions correctly
+- Learner can draw and explain their graph architecture</p>
+<hr />
+<h2 id="phase-4-production-engineering-observability">Phase 4: Production Engineering &amp; Observability</h2>
+<p><strong>Duration:</strong> 2–3 weeks | <strong>Prerequisites:</strong> Phase 3 complete</p>
+<p><strong>Goal:</strong> Ship reliable AI apps with monitoring, evaluation, and cost control.</p>
+<h3 id="step-41-langsmith-tracing-deep-dive">Step 4.1 — LangSmith Tracing Deep Dive</h3>
+<p><strong>Teach:</strong> Full LangSmith setup, reading traces, identifying bottlenecks.</p>
+<p><strong>Key Concepts:</strong>
+- Every LLM call, tool call, and retrieval step is logged as a "trace"
+- Trace waterfall view: see exactly what happened in what order, with latencies
+- Token usage tracking and cost estimation
+- Debugging: finding where the agent went wrong in a multi-step flow</p>
+<p><strong>Completion Check:</strong> Learner can navigate LangSmith traces for their Phase 3 agent and identify which step is slowest.</p>
+<h3 id="step-42-evaluation-beyond-vibes">Step 4.2 — Evaluation: Beyond Vibes</h3>
+<p><strong>Teach:</strong> Systematic evaluation of AI app quality.</p>
+<p><strong>First-Principles:</strong> "You can't improve what you can't measure. Vibes-based testing ('it seems to work') fails in production because edge cases are invisible until they're in front of users."</p>
+<p><strong>Key Concepts:</strong>
+- LangSmith eval datasets: curated input/expected-output pairs
+- Built-in evaluators: RAG relevance, faithfulness, answer correctness
+- Custom evaluators for domain-specific quality
+- Pairwise annotation: A/B testing agent outputs
+- Agent trajectory evals: did the agent take the right steps, not just produce the right answer?</p>
+<p><strong>Completion Check:</strong> Learner has an eval dataset with 10+ examples and can run automated evaluations on their Phase 3 agent.</p>
+<h3 id="step-43-cost-optimization-model-routing">Step 4.3 — Cost Optimization &amp; Model Routing</h3>
+<p><strong>Teach:</strong> Practical cost management for Gemini-powered apps.</p>
+<p><strong>Key Concepts:</strong>
+- Model selection per task: Flash Lite for simple classification, Flash for most tasks, Pro for complex reasoning
+- Context caching: reusing large system prompts / documents across requests
+- Token budgeting: setting max_tokens to prevent runaway costs
+- Batching: using <code>.batch()</code> for parallel processing where possible</p>
+<p><strong>Completion Check:</strong> Learner can articulate a cost optimization strategy for their app (which model for which task, when to cache, how to monitor spend).</p>
+<h3 id="step-44-deployment">Step 4.4 — Deployment</h3>
+<p><strong>Teach:</strong> Getting a LangGraph app into production.</p>
+<p><strong>Key Concepts:</strong>
+- Self-hosted: FastAPI + LangGraph (the straightforward path)
+- LangGraph Platform (managed hosting option)
+- Environment configuration: API keys, tracing, checkpoint storage
+- Health checks and monitoring</p>
+<p><strong>Completion Check:</strong> Learner has their Phase 3 agent running as a FastAPI endpoint.</p>
+<h3 id="phase-4-capstone-project">🔨 Phase 4 Capstone Project</h3>
+<p><strong>Task:</strong> Production-grade version of the Phase 3 agent:
+1. Full LangSmith tracing enabled
+2. Eval suite with 10+ test cases and automated scoring
+3. Deployed as a FastAPI API
+4. Cost monitoring: track token usage per request
+5. Model routing: use Flash for simple queries, Pro for complex reasoning</p>
+<p><strong>Completion Criteria:</strong>
+- API is callable and returns agent responses
+- Eval suite passes with documented quality metrics
+- Cost per request is tracked and optimized
+- Learner can demo the full system end-to-end</p>
+<hr />
+<h2 id="resources-curated-current">Resources — Curated &amp; Current</h2>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Use For</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>docs.langchain.com</strong></td>
+<td>Official unified docs (Python + JS)</td>
+<td>Always — your source of truth</td>
+</tr>
+<tr>
+<td><strong>LangChain Conceptual Guides</strong></td>
+<td>Understanding "why" behind each abstraction</td>
+<td>Before each phase</td>
+</tr>
+<tr>
+<td><strong>LangGraph from First Principles</strong> (official blog)</td>
+<td>Deep understanding of graph-based agents</td>
+<td>Before Phase 3</td>
+</tr>
+<tr>
+<td><strong>LangChain Google GenAI docs</strong></td>
+<td>Gemini integration specifics</td>
+<td>Phase 0 onward</td>
+</tr>
+<tr>
+<td><strong>LangSmith docs</strong></td>
+<td>Observability, tracing, evals</td>
+<td>Phase 0 (setup) and Phase 4 (deep dive)</td>
+</tr>
+<tr>
+<td><strong>Interrupt 2025 talks</strong> (YouTube)</td>
+<td>Real-world architectures from Uber, Cisco, etc.</td>
+<td>After Phase 2 for production context</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Tutorial Hygiene:</strong> Before following any external tutorial, check the date and the imports. If you see <code>initialize_agent</code>, <code>AgentExecutor</code>, or heavy LCEL pipe syntax (<code>prompt | llm | parser</code>) — it's pre-1.0. Find the modern equivalent using the official docs.</p>
+</blockquote>
+<hr />
+<h2 id="operating-principles">Operating Principles</h2>
+<p><strong>Build before you read exhaustively.</strong> Each phase has a checkpoint project. Don't move to the next phase until you've built something — even if it's rough. Reading docs without building creates an illusion of understanding.</p>
+<p><strong>Always ask "what is this abstracting?"</strong> When you use <code>ChatGoogleGenerativeAI</code>, know that underneath it's calling the <code>google-genai</code> SDK. When you create a tool, know that LangChain is converting your function signature into a JSON schema that Gemini's function calling API consumes. The abstractions are useful, but understanding what they hide is power.</p>
+<p><strong>Enable LangSmith from Phase 0.</strong> Seeing the trace of every LLM call, every tool invocation, every retry — that's how you build intuition for what's actually happening.</p>
+<p><strong>Use Gemini Flash for learning, Pro for production.</strong> Flash is fast and cheap — perfect for iteration. Switch to Pro when precision matters.</p>
+<hr />
+<p><em>Learning Plan v2.0 — Model-Guided Curriculum</em>
+<em>Built for first-principles learning · LangChain 1.0 + LangGraph 1.0 era · Gemini-native path</em>
+<em>Last updated: March 2026</em></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+  <form class="md-feedback" name="feedback" hidden>
+    <fieldset>
+      <legend class="md-feedback__title">
+        Was this page helpful?
+      </legend>
+      <div class="md-feedback__inner">
+        <div class="md-feedback__list">
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page was helpful" data-md-value="1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page could be improved" data-md-value="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14"/></svg>
+            </button>
+          
+        </div>
+        <div class="md-feedback__note">
+          
+            <div data-md-value="1" hidden>
+              
+              
+                
+              
+              
+              
+                
+                
+              
+              Thanks for your feedback!
+            </div>
+          
+            <div data-md-value="0" hidden>
+              
+              
+                
+              
+              
+              
+                
+                
+              
+              Thanks for your feedback! Help us improve this page by opening an issue.
+            </div>
+          
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/ishitvagoel" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.sticky", "search.suggest", "search.highlight", "content.code.copy", "content.tooltips", "content.action.edit", "content.action.view"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
