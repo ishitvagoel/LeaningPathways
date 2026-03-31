@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content_action %}
+  {# Original edit/view buttons #}
+  {{ super() }}
+
+  {# Custom Download button #}
+  {% if page and page.file %}
+    <a href="https://github.com/ishitvagoel/LearningPathways/raw/main/docs/{{ page.file.src_path }}" 
+       title="Download Markdown" 
+       class="md-content__button md-icon" 
+       download>
+      {% include ".icons/material/download.svg" %}
+    </a>
+  {% endif %}
+{% endblock %}

@@ -2,6 +2,7 @@ site_name: Learning Pathways
 site_url: https://ishitvagoel.github.io/LearningPathways/
 theme:
   name: material
+  custom_dir: overrides
   font:
     text: Inter
     code: Fira Code
