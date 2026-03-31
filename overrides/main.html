@@ -1,47 +1,44 @@
 {% extends "base.html" %}
 
 {% block content_action %}
-  {# Original edit/view buttons #}
+  {# Original view button #}
   {{ super() }}
 
-  {# Custom Download button with forced download via same-domain fetch #}
+  {# Custom Download button with absolute-root path and robust JS #}
   {% if page and page.file %}
     <a href="javascript:void(0)" 
-       onclick="forceDownload('{{ base_url }}sources/{{ page.file.src_path }}', '{{ page.title | replace("'", "\\'") }}.md')"
+       onclick="downloadFile('{{ config.site_url }}sources/{{ page.file.src_path }}', '{{ page.title | replace("'", "\\'") }}.md')"
        title="Download Markdown" 
        class="md-content__button md-icon">
       {% include ".icons/material/download.svg" %}
     </a>
 
     <script>
-      function forceDownload(url, fileName) {
-        // Clean up filename
-        const safeName = fileName.replace(/[/\\?%*:|"<>]/g, '-').trim();
-        
-        fetch(url)
-          .then(response => {
-            if (!response.ok) throw new Error('File not found');
-            return response.blob();
-          })
-          .then(blob => {
-            const blobUrl = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.style.display = 'none';
-            a.href = blobUrl;
-            a.download = safeName;
-            document.body.appendChild(a);
-            a.click();
+      async function downloadFile(url, fileName) {
+        try {
+          const response = await fetch(url);
+          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+          
+          const blob = await response.blob();
+          const blobUrl = window.URL.createObjectURL(blob);
+          
+          const link = document.createElement('a');
+          link.href = blobUrl;
+          link.download = fileName.replace(/[/\\?%*:|"<>]/g, '-');
+          
+          document.body.appendChild(link);
+          link.click();
+          
+          // Cleanup
+          setTimeout(() => {
             window.URL.revokeObjectURL(blobUrl);
-            document.body.removeChild(a);
-          })
-          .catch(err => {
-            console.error('Download failed, falling back to direct link:', err);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = safeName;
-            a.target = '_blank';
-            a.click();
-          });
+            document.body.removeChild(link);
+          }, 100);
+        } catch (error) {
+          console.error('Download failed:', error);
+          // Fallback to direct navigation if fetch fails
+          window.location.href = url;
+        }
       }
     </script>
   {% endif %}
