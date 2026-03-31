@@ -34,6 +34,8 @@ jobs:
             mkdocs-material-
       - run: pip install -r requirements.txt
       - run: mkdocs build
+      - name: Copy source files for download
+        run: cp -r docs site/sources
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
